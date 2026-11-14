@@ -27,15 +27,15 @@ jobs:
         uses: actions/checkout@v6
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+      - name: Prepare the static site
+        run: |
+          mkdir -p _site
+          cp index.html styles.css script.js favicon.svg _site/
+          cp -R assets _site/assets
       - name: Upload the static portfolio
         uses: actions/upload-pages-artifact@v4
         with:
-          path: |
-            index.html
-            styles.css
-            script.js
-            favicon.svg
-            assets
+          path: _site
       - name: Deploy the portfolio
         id: deployment
         uses: actions/deploy-pages@v4
